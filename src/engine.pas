@@ -22,7 +22,7 @@ type
     procedure LoadConfig;
     procedure SaveConfig;
     procedure SetShellTitle(ProcessId: LongWord; Title: string);
-    procedure SetShellTitleForSh(Title: string);
+    procedure SetlTitleForShell(Title: string);
   public
     constructor Create;
     destructor Destroy; override;
@@ -48,9 +48,9 @@ uses
 {$ENDIF}
   , Utils;
 
-const
-  SH_BINARY_PATH            = 'bin\sh.exe';
-  SH_ONE_SHOT_WINDOW_TITLE  = 'DreamSDK Shell';
+resourcestring
+  ShellBinaryWindowTitle        = 'bin\sh.exe';
+  ShellApplicationWindowTitle   = 'DreamSDK Shell Launcher';
 
 { TDreamcastSoftwareDevelopmentKitRunner }
 
@@ -146,7 +146,7 @@ begin
 {$IFDEF Windows}
         if (not UseMintty) and IsSingleShot then
         begin
-          SetShellTitleForSH(SH_ONE_SHOT_WINDOW_TITLE);
+          SetlTitleForShell(ShellApplicationWindowTitle);
         end;
 {$ENDIF}
       end;
@@ -189,7 +189,7 @@ begin
     SetWindowText(hWnd, PChar(Title));
 end;
 
-procedure TDreamcastSoftwareDevelopmentKitRunner.SetShellTitleForSh(
+procedure TDreamcastSoftwareDevelopmentKitRunner.SetlTitleForShell(
   Title: string);
 var
   Tries: Integer;
@@ -199,7 +199,8 @@ var
 begin
   Tries := 0;
 
-  FindTitle := IncludeTrailingPathDelimiter(ExtractFilePath(MSYSExecutable)) + SH_BINARY_PATH;
+  FindTitle := IncludeTrailingPathDelimiter(ExtractFilePath(MSYSExecutable))
+    + ShellBinaryWindowTitle;
   repeat
     hWnd := FindWindow(nil, PChar(FindTitle));
     Sleep(10);

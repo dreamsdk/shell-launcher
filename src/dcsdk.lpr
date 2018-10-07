@@ -13,6 +13,10 @@ uses
   Engine,
   Utils;
 
+resourcestring
+  MSYSShellNotFound = 'MSYS Shell was not found ("%s").';
+  ErrorTitle = 'Error';
+
 var
   DreamcastSoftwareDevelopmentKitRunner: TDreamcastSoftwareDevelopmentKitRunner;
 
@@ -42,7 +46,8 @@ begin
       DreamcastSoftwareDevelopmentKitRunner.Execute();
     end
     else
-      MessageBox(0, PChar(Format('MSYS Shell wasn''t found ("%s").', [DreamcastSoftwareDevelopmentKitRunner.MSYSExecutable])), 'Error', MB_ICONERROR);
+      MessageBox(0, PChar(Format(MSYSShellNotFound, [DreamcastSoftwareDevelopmentKitRunner.MSYSExecutable])),
+        PChar(ErrorTitle), MB_ICONERROR);
   finally
     DreamcastSoftwareDevelopmentKitRunner.Free;
   end;

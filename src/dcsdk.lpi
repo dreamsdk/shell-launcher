@@ -11,7 +11,7 @@
       </Flags>
       <SessionStorage Value="InProjectDir"/>
       <MainUnit Value="0"/>
-      <Title Value="DreamSDK Launcher"/>
+      <Title Value="DreamSDK Shell Launcher"/>
       <UseAppBundle Value="False"/>
       <ResourceType Value="res"/>
       <Icon Value="0"/>
@@ -19,7 +19,7 @@
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
-      <BuildNr Value="20"/>
+      <BuildNr Value="25"/>
       <Language Value="040C"/>
       <StringTable ProductVersion="0.0.0.13"/>
     </VersionInfo>
