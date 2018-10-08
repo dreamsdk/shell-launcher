@@ -21,8 +21,7 @@ type
     function GetConfigurationFileName: TFileName;
     procedure LoadConfig;
     procedure SaveConfig;
-    procedure SetShellTitle(ProcessId: LongWord; Title: string);
-    procedure SetlTitleForShell(Title: string);
+    procedure SetShellWindowTitle(Title: string);
   public
     constructor Create;
     destructor Destroy; override;
@@ -46,7 +45,7 @@ uses
 {$IF Defined(Unix) OR Defined(Darwin)}
   , UTF8Process
 {$ENDIF}
-  , Utils;
+  ;
 
 resourcestring
   ShellBinaryWindowTitle        = 'bin\sh.exe';
@@ -146,7 +145,7 @@ begin
 {$IFDEF Windows}
         if (not UseMintty) and IsSingleShot then
         begin
-          SetlTitleForShell(ShellApplicationWindowTitle);
+          SetShellWindowTitle(ShellApplicationWindowTitle);
         end;
 {$ENDIF}
       end;
@@ -164,32 +163,13 @@ begin
   IniFile := TIniFile.Create(GetConfigurationFileName);
   try
     IniFile.WriteString('General', 'MSYSExecutable', fMSYSExecutable);
-    IniFile.WriteBool('General', 'UseMintty', fUseMintty);
+    IniFile.WriteBool('General', 'UseMinTTY', fUseMintty);
   finally
     IniFile.Free;
   end;
 end;
 
-procedure TDreamcastSoftwareDevelopmentKitRunner.SetShellTitle(
-  ProcessId: LongWord; Title: string);
-var
-  Tries: Integer;
-  hWnd: THandle;
-
-begin
-  Tries := 0;
-
-  repeat
-    hWnd := FindWindowByProcessId(ProcessId);
-    Sleep(100);
-    Inc(Tries);
-  until (hWnd <> 0) or (Tries > 50);
-
-  if (hWnd <> 0) then
-    SetWindowText(hWnd, PChar(Title));
-end;
-
-procedure TDreamcastSoftwareDevelopmentKitRunner.SetlTitleForShell(
+procedure TDreamcastSoftwareDevelopmentKitRunner.SetShellWindowTitle(
   Title: string);
 var
   Tries: Integer;

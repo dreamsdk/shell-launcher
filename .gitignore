@@ -69,3 +69,4 @@ __recovery/
 backup/
 lib/
 *.lps
+*.conf

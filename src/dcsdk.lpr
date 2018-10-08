@@ -10,8 +10,7 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   SysUtils,
-  Engine,
-  Utils;
+  Engine;
 
 resourcestring
   MSYSShellNotFound = 'MSYS Shell was not found ("%s").';
