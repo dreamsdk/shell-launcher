@@ -1,6 +1,7 @@
 program dcsdk;
 
 {$mode objfpc}{$H+}
+{$R *.res}
 
 uses
   {$IFDEF Windows}
@@ -10,43 +11,51 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   SysUtils,
+  Classes,
   Engine;
 
 resourcestring
-  MSYSShellNotFound = 'MSYS Shell was not found ("%s").';
+  MSYSShellNotFound = 'MinGW/MSYS is not properly installed.';
   ErrorTitle = 'Error';
 
 var
   DreamcastSoftwareDevelopmentKitRunner: TDreamcastSoftwareDevelopmentKitRunner;
+  IsAutomatedCall: Boolean;
+  CommandOutput: string;
 
 function ParseCommandLine: string;
 var
   i: Integer;
-  Sep: string;
+  Sep, Param: string;
 
 begin
   Result := '';
   Sep := '';
   for i := 1 to ParamCount do
   begin
-    Result := Result + Sep + ParamStr(i);
-    Sep := ' ';
+    Param := ParamStr(i);
+    if LowerCase(Param) <> '--dcsdk-automated-call' then
+    begin
+      Result := Result + Sep + Param;
+      Sep := ' ';
+    end
+    else
+      IsAutomatedCall := True;
   end;
 end;
 
-{$R *.res}
-
 begin
+  IsAutomatedCall := False;
   DreamcastSoftwareDevelopmentKitRunner := TDreamcastSoftwareDevelopmentKitRunner.Create;
   try
-    if FileExists(DreamcastSoftwareDevelopmentKitRunner.MSYSExecutable) then
+    if DreamcastSoftwareDevelopmentKitRunner.Healthy then
     begin
       DreamcastSoftwareDevelopmentKitRunner.CommandLine := ParseCommandLine;
+      DreamcastSoftwareDevelopmentKitRunner.AutomatedCall := IsAutomatedCall;
       DreamcastSoftwareDevelopmentKitRunner.Execute();
     end
     else
-      MessageBox(0, PChar(Format(MSYSShellNotFound, [DreamcastSoftwareDevelopmentKitRunner.MSYSExecutable])),
-        PChar(ErrorTitle), MB_ICONERROR);
+      MessageBox(0, PChar(MSYSShellNotFound), PChar(ErrorTitle), MB_ICONERROR);
   finally
     DreamcastSoftwareDevelopmentKitRunner.Free;
   end;

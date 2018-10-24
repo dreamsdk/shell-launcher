@@ -67,7 +67,7 @@
     <RunParams>
       <local>
         <FormatVersion Value="1"/>
-        <CommandLineParams Value="make clean"/>
+        <CommandLineParams Value="make clean --dcsdk-automated-call"/>
       </local>
     </RunParams>
     <Units Count="2">
