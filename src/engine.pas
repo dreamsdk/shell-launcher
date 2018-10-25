@@ -13,6 +13,7 @@ type
 
   TDreamcastSoftwareDevelopmentKitRunner = class(TObject)
   private
+    fEnvironmentVariables: TStringList;
     fAutomatedCall: Boolean;
     fInstallPath: TFileName;
     fExecutableMinTTY: TFileName;
@@ -23,6 +24,7 @@ type
     function GetHealthy: Boolean;
     function GetApplicationPath: TFileName;
     function GetConfigurationFileName: TFileName;
+    procedure RetrieveEnvironmentVariables;
     procedure LoadConfig;
     procedure SaveConfig;
     procedure SetShellWindowTitle(Title: string);
@@ -86,6 +88,15 @@ end;
 function TDreamcastSoftwareDevelopmentKitRunner.GetConfigurationFileName: TFileName;
 begin
   Result := GetApplicationPath + 'dcsdk.conf';
+end;
+
+procedure TDreamcastSoftwareDevelopmentKitRunner.RetrieveEnvironmentVariables;
+var
+  i: Integer;
+
+begin
+  for i := 1 to GetEnvironmentVariableCount do
+    fEnvironmentVariables.Add(GetEnvironmentString(i));
 end;
 
 procedure TDreamcastSoftwareDevelopmentKitRunner.LoadConfig;
@@ -173,6 +184,8 @@ var
   end;
 
 begin
+  RetrieveEnvironmentVariables;
+
   IsSingleShot := Length(CommandLine) > 0;
 
 {$IFDEF Windows}
@@ -181,6 +194,9 @@ begin
     OurProcess := TProcessUTF8.Create(nil);
 {$ENDIF}
     try
+      // Initialize Environment context
+      OurProcess.Environment.AddStrings(fEnvironmentVariables);
+
       // Extracted from msys.bat
       if UseMinTTY and not IsSingleShot then
       begin
@@ -261,11 +277,13 @@ end;
 
 constructor TDreamcastSoftwareDevelopmentKitRunner.Create;
 begin
+  fEnvironmentVariables := TStringList.Create;
   LoadConfig;
 end;
 
 destructor TDreamcastSoftwareDevelopmentKitRunner.Destroy;
 begin
+  fEnvironmentVariables.Free;
   SaveConfig;
   inherited Destroy;
 end;

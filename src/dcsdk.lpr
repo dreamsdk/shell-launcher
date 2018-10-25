@@ -21,7 +21,6 @@ resourcestring
 var
   DreamcastSoftwareDevelopmentKitRunner: TDreamcastSoftwareDevelopmentKitRunner;
   IsAutomatedCall: Boolean;
-  CommandOutput: string;
 
 function ParseCommandLine: string;
 var
