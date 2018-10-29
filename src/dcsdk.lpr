@@ -1,4 +1,4 @@
-program dcsdk;
+program DCSDK;
 
 {$mode objfpc}{$H+}
 {$R *.res}
@@ -51,7 +51,7 @@ begin
     begin
       DreamcastSoftwareDevelopmentKitRunner.CommandLine := ParseCommandLine;
       DreamcastSoftwareDevelopmentKitRunner.AutomatedCall := IsAutomatedCall;
-      DreamcastSoftwareDevelopmentKitRunner.Execute();
+      DreamcastSoftwareDevelopmentKitRunner.Execute;
     end
     else
       MessageBox(0, PChar(MSYSShellNotFound), PChar(ErrorTitle), MB_ICONERROR);

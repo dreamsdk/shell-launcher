@@ -19,7 +19,7 @@
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
-      <BuildNr Value="31"/>
+      <BuildNr Value="33"/>
       <Language Value="040C"/>
       <StringTable ProductVersion="0.0.0.13"/>
     </VersionInfo>
@@ -67,13 +67,15 @@
     <RunParams>
       <local>
         <FormatVersion Value="1"/>
-        <CommandLineParams Value="make clean --dcsdk-automated-call"/>
+        <CommandLineParams Value="git clone https://github.com/sizious/kos.git kos"/>
+        <WorkingDirectory Value="E:\dcsdk\msys\1.0\opt\toolchains\dc\"/>
       </local>
     </RunParams>
     <Units Count="2">
       <Unit0>
         <Filename Value="dcsdk.lpr"/>
         <IsPartOfProject Value="True"/>
+        <UnitName Value="DCSDK"/>
       </Unit0>
       <Unit1>
         <Filename Value="engine.pas"/>

@@ -142,7 +142,7 @@ var
     try
       BytesRead := 0;
 
-      while True do
+      while OurProcess.Running do
       begin
         MemStream.SetSize(BytesRead + READ_BYTES);
         NumBytes := OurProcess.Output.Read((MemStream.Memory + BytesRead)^, READ_BYTES);
