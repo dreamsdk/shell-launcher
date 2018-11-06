@@ -4,6 +4,7 @@ program DCSDK;
 {$R *.res}
 
 uses
+  Interfaces,
   {$IFDEF Windows}
   Windows,
   {$ENDIF}
@@ -12,7 +13,10 @@ uses
   {$ENDIF}{$ENDIF}
   SysUtils,
   Classes,
-  Engine;
+  Engine,
+  Version,
+  SysTools,
+  VerIntf;
 
 resourcestring
   MSYSShellNotFound = 'MinGW/MSYS is not properly installed.';
@@ -20,7 +24,8 @@ resourcestring
 
 var
   DreamcastSoftwareDevelopmentKitRunner: TDreamcastSoftwareDevelopmentKitRunner;
-  IsAutomatedCall: Boolean;
+  IsGetVersion: Boolean = False;
+  CommandLine: string;
 
 function ParseCommandLine: string;
 var
@@ -33,30 +38,34 @@ begin
   for i := 1 to ParamCount do
   begin
     Param := ParamStr(i);
-    if LowerCase(Param) <> '--dcsdk-automated-call' then
+    if LowerCase(Param) <> GET_MODULE_VERSION_SWITCH then
     begin
       Result := Result + Sep + Param;
       Sep := ' ';
     end
     else
-      IsAutomatedCall := True;
+      IsGetVersion := True;
   end;
 end;
 
 begin
-  IsAutomatedCall := False;
-  DreamcastSoftwareDevelopmentKitRunner := TDreamcastSoftwareDevelopmentKitRunner.Create;
-  try
-    if DreamcastSoftwareDevelopmentKitRunner.Healthy then
-    begin
-      DreamcastSoftwareDevelopmentKitRunner.CommandLine := ParseCommandLine;
-      DreamcastSoftwareDevelopmentKitRunner.AutomatedCall := IsAutomatedCall;
-      DreamcastSoftwareDevelopmentKitRunner.Execute;
-    end
-    else
-      MessageBox(0, PChar(MSYSShellNotFound), PChar(ErrorTitle), MB_ICONERROR);
-  finally
-    DreamcastSoftwareDevelopmentKitRunner.Free;
-  end;
+  CommandLine := ParseCommandLine;
+  if not IsGetVersion then
+  begin
+    DreamcastSoftwareDevelopmentKitRunner := TDreamcastSoftwareDevelopmentKitRunner.Create;
+    try
+      if DreamcastSoftwareDevelopmentKitRunner.Healthy then
+      begin
+        DreamcastSoftwareDevelopmentKitRunner.CommandLine := CommandLine;
+        DreamcastSoftwareDevelopmentKitRunner.Execute;
+      end
+      else
+        MessageBox(0, PChar(MSYSShellNotFound), PChar(ErrorTitle), MB_ICONERROR);
+    finally
+      DreamcastSoftwareDevelopmentKitRunner.Free;
+    end;
+  end
+  else
+    SaveModuleVersion(ParamStr(0), GetProcessID);
 end.
 
