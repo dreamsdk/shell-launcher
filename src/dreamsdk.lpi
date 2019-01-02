@@ -21,7 +21,7 @@
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="1"/>
-      <BuildNr Value="74"/>
+      <BuildNr Value="76"/>
       <StringTable Comments="http://dreamsdk.sizious.com/" CompanyName="The DreamSDK Team" FileDescription="DreamSDK Shell Launcher" InternalName="dreamsdk" LegalCopyright="© Copyleft 2018" LegalTrademarks="Sega and Dreamcast are registered trademark of Sega Games Co., Ltd." OriginalFilename="dreamsdk.exe" ProductName="DreamSDK" ProductVersion="1.1.0.0"/>
     </VersionInfo>
     <BuildModes Count="2">
@@ -31,7 +31,7 @@
           <Version Value="11"/>
           <PathDelim Value="\"/>
           <Target>
-            <Filename Value="..\bin\dcsdk"/>
+            <Filename Value="..\bin\dreamsdk"/>
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
@@ -82,7 +82,7 @@
     </RequiredPackages>
     <Units Count="7">
       <Unit0>
-        <Filename Value="dcsdk.lpr"/>
+        <Filename Value="dreamsdk.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="DCSDK"/>
       </Unit0>
@@ -122,7 +122,7 @@
     <Version Value="11"/>
     <PathDelim Value="\"/>
     <Target>
-      <Filename Value="..\bin\dcsdk"/>
+      <Filename Value="..\bin\dreamsdk"/>
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
