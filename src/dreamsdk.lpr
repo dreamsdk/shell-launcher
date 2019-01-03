@@ -21,24 +21,6 @@ uses
 var
   DreamcastSoftwareDevelopmentKitRunner: TDreamcastSoftwareDevelopmentKitRunner;
 
-function IsGetModuleVersionCommand: Boolean;
-var
-  i: Integer;
-  Param: string;
-
-begin
-  Result := False;
-  for i := 1 to ParamCount do
-  begin
-    Param := ParamStr(i);
-    if LowerCase(Param) = GET_MODULE_VERSION_SWITCH then
-    begin
-      Result := True;
-      Break;
-    end;
-  end;
-end;
-
 begin
   if not IsGetModuleVersionCommand then
   begin
@@ -52,6 +34,6 @@ begin
       end;
   end
   else
-    SaveModuleVersion(ParamStr(0), GetProcessID);
+    SaveModuleVersion;
 end.
 
