@@ -21,6 +21,13 @@ uses
 var
   DreamcastSoftwareDevelopmentKitRunner: TDreamcastSoftwareDevelopmentKitRunner;
 
+function GetWorkingDirectory: TFileName;
+begin
+  Result := EmptyStr;
+  if ParamCount > 0 then
+    Result := ParamStr(1);
+end;
+
 begin
   if not IsGetModuleVersionCommand then
   begin
@@ -28,7 +35,10 @@ begin
     with DreamcastSoftwareDevelopmentKitRunner do
       try
         if CheckHealty then
-          StartShell
+        begin
+          WorkingDirectory := GetWorkingDirectory;
+          StartShell;
+        end;
       finally
         Free;
       end;
