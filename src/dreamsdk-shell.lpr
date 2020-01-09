@@ -1,4 +1,4 @@
-program DCSDK;
+program DreamSdkShell;
 
 {$mode objfpc}{$H+}
 {$R *.res}
