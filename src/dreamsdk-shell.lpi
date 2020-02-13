@@ -20,7 +20,7 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="3"/>
-      <BuildNr Value="111"/>
+      <BuildNr Value="112"/>
       <StringTable Comments="http://dreamsdk.org/" CompanyName="The DreamSDK Team" FileDescription="DreamSDK Shell Launcher" InternalName="dreamsdk-shell" LegalCopyright="© Copyleft 2018-2020" LegalTrademarks="Sega and Dreamcast are registered trademark of Sega Games Co., Ltd." OriginalFilename="dreamsdk-shell.exe" ProductName="DreamSDK" ProductVersion="3.0.4.2002"/>
     </VersionInfo>
     <BuildModes Count="2">
