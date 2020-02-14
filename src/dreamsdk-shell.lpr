@@ -13,10 +13,9 @@ uses
   {$ENDIF}{$ENDIF}
   SysUtils,
   Classes,
-  Version,
+  Runner,
   SysTools,
-  VerIntf,
-  Runner;
+  VerIntf;
 
 var
   DreamcastSoftwareDevelopmentKitRunner: TDreamcastSoftwareDevelopmentKitRunner;
@@ -29,6 +28,9 @@ begin
 end;
 
 begin
+{$IFDEF DEBUG}
+  DebugLog('Starting...');
+{$ENDIF}
   if not IsGetModuleVersionCommand then
   begin
     DreamcastSoftwareDevelopmentKitRunner := TDreamcastSoftwareDevelopmentKitRunner.Create;
@@ -45,5 +47,8 @@ begin
   end
   else
     SaveModuleVersion;
+{$IFDEF DEBUG}
+  DebugLog('Exiting...');
+{$ENDIF}
 end.
 

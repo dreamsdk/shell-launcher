@@ -20,7 +20,7 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="3"/>
-      <BuildNr Value="112"/>
+      <BuildNr Value="145"/>
       <StringTable Comments="http://dreamsdk.org/" CompanyName="The DreamSDK Team" FileDescription="DreamSDK Shell Launcher" InternalName="dreamsdk-shell" LegalCopyright="© Copyleft 2018-2020" LegalTrademarks="Sega and Dreamcast are registered trademark of Sega Games Co., Ltd." OriginalFilename="dreamsdk-shell.exe" ProductName="DreamSDK" ProductVersion="3.0.4.2002"/>
     </VersionInfo>
     <BuildModes Count="2">
@@ -57,7 +57,7 @@
             </Options>
           </Linking>
           <Other>
-            <CustomOptions Value="-dRELEASE"/>
+            <CustomOptions Value="-dRELEASE -dGUI"/>
           </Other>
         </CompilerOptions>
       </Item2>
@@ -66,16 +66,9 @@
       <Version Value="2"/>
     </PublishOptions>
     <RunParams>
-      <local>
-        <WorkingDirectory Value="E:\dcsdk\msys\1.0\opt\toolchains\dc\"/>
-      </local>
       <FormatVersion Value="2"/>
       <Modes Count="1">
-        <Mode0 Name="default">
-          <local>
-            <WorkingDirectory Value="E:\dcsdk\msys\1.0\opt\toolchains\dc\"/>
-          </local>
-        </Mode0>
+        <Mode0 Name="default"/>
       </Modes>
     </RunParams>
     <RequiredPackages Count="2">
@@ -86,41 +79,11 @@
         <PackageName Value="LCLBase"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="7">
+    <Units Count="1">
       <Unit0>
         <Filename Value="dreamsdk-shell.lpr"/>
         <IsPartOfProject Value="True"/>
       </Unit0>
-      <Unit1>
-        <Filename Value="D:\common\src\sys\systools.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="SysTools"/>
-      </Unit1>
-      <Unit2>
-        <Filename Value="D:\common\src\sys\version.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="Version"/>
-      </Unit2>
-      <Unit3>
-        <Filename Value="D:\common\src\verintf.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="VerIntf"/>
-      </Unit3>
-      <Unit4>
-        <Filename Value="D:\common\src\firstrun.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="FirstRun"/>
-      </Unit4>
-      <Unit5>
-        <Filename Value="D:\common\src\sys\runcmd.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="RunCmd"/>
-      </Unit5>
-      <Unit6>
-        <Filename Value="D:\common\src\runner.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="Runner"/>
-      </Unit6>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -164,7 +127,7 @@
       </Options>
     </Linking>
     <Other>
-      <CustomOptions Value="-dDEBUG"/>
+      <CustomOptions Value="-dDEBUG -dGUI"/>
     </Other>
   </CompilerOptions>
   <Debugging>
