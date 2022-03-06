@@ -36,6 +36,7 @@ begin
     DreamcastSoftwareDevelopmentKitRunner := TDreamcastSoftwareDevelopmentKitRunner.Create;
     with DreamcastSoftwareDevelopmentKitRunner do
       try
+        InteractiveShell := True;
         if CheckHealty then
         begin
           WorkingDirectory := GetWorkingDirectory;
