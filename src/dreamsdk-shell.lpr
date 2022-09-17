@@ -4,7 +4,6 @@ program DreamSdkShell;
 {$R *.res}
 
 uses
-  Interfaces,
   {$IFDEF Windows}
   Windows,
   {$ENDIF}
@@ -13,12 +12,14 @@ uses
   {$ENDIF}{$ENDIF}
   SysUtils,
   Classes,
+  Interfaces,
+  Forms,
   Runner,
   SysTools,
   VerIntf;
 
 var
-  DreamcastSoftwareDevelopmentKitRunner: TDreamcastSoftwareDevelopmentKitRunner;
+  ShellLauncher: TDreamcastSoftwareDevelopmentKitRunner;
 
 function GetWorkingDirectory: TFileName;
 begin
@@ -29,12 +30,12 @@ end;
 
 begin
 {$IFDEF DEBUG}
-  DebugLog('Starting...');
+  DebugLog('Starting ' + Application.Title + ' ...');
 {$ENDIF}
   if not IsGetModuleVersionCommand then
   begin
-    DreamcastSoftwareDevelopmentKitRunner := TDreamcastSoftwareDevelopmentKitRunner.Create;
-    with DreamcastSoftwareDevelopmentKitRunner do
+    ShellLauncher := TDreamcastSoftwareDevelopmentKitRunner.Create;
+    with ShellLauncher do
       try
         InteractiveShell := True;
         if CheckHealty then
@@ -49,7 +50,7 @@ begin
   else
     SaveModuleVersion;
 {$IFDEF DEBUG}
-  DebugLog('Exiting...');
+  DebugLog('Exiting ' + Application.Title + ' ...');
 {$ENDIF}
 end.
 
